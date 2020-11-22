@@ -5,8 +5,29 @@ import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: '36ch',
+    backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
+  },
+}));
 
 const App=()=>{
+  const classes = useStyles();
+
   const [items,setItems]=useState([
     {
       itemId:uuidv4(),
@@ -37,7 +58,9 @@ const App=()=>{
       if(item.itemId===event)
       {
         if(cart.includes(item))
-          alert("Item already in Cart");
+        {
+          alert("Item already added to the cart");
+        }
         else
         {
           setCart([...cart,item])
@@ -63,7 +86,7 @@ const App=()=>{
     }
     else
     {
-        toast.success('🦄 Wow you brought it!', {
+        toast.success('🦄 Wow you brought it!!', {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -96,7 +119,36 @@ const App=()=>{
             Cart
             <span style={{float:"right"}}> Cart Total : Rs. {total}</span>
           </h1>
-          
+          <div>
+            <List className={classes.root}>
+              {cart.map(item=>{
+                return(
+                <div>
+                  <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={item.url} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={item.name}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
+                          Rs. {item.price}
+                        </Typography>
+                      </React.Fragment>
+                    }
+                  />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                </div>)
+              })}
+            </List>
+          </div>
           <div>
             <Button variant="contained" color="default" onClick={chk}>
               CheckOut
