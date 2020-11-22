@@ -46,6 +46,12 @@ const App=()=>{
       url:"https://5.imimg.com/data5/FI/FP/FS/SELLER-12188422/apple-macbook-intel-core-i5-laptop-500x500.jpg",
       name:"Apple MacBook",
       price:165000
+    },
+    {
+      itemId:uuidv4(),
+      url:"https://5.imimg.com/data5/PG/EI/MY-14352828/apple-mac-mini-500x500.jpg",
+      name:"Apple Mac Mini",
+      price:125000
     }
   ]);
 
@@ -103,18 +109,21 @@ const App=()=>{
   return(
     <div style={{padding:"10px"}}>
       <Grid container spacing={24}>
-        <Grid item md={3} style={{margin:"5px"}}>
+        <Grid item md={3}>
           <Card url={items[0].url} name={items[0].name} price={items[0].price} idx={items[0].itemId} clickMe={handleClick}/>
         </Grid>
-        <Grid item md={3} style={{margin:"5px"}}>
+        <Grid item md={3}>
           <Card url={items[1].url} name={items[1].name} price={items[1].price} idx={items[1].itemId} clickMe={handleClick}/>
         </Grid>
-        <Grid item md={3} style={{margin:"5px"}}>
+        <Grid item md={3}>
           <Card url={items[2].url} name={items[2].name} price={items[2].price} idx={items[2].itemId} clickMe={handleClick}/>
+        </Grid>
+        <Grid item md={3}>
+          <Card url={items[3].url} name={items[3].name} price={items[3].price} idx={items[3].itemId} clickMe={handleClick}/>
         </Grid>
       </Grid>
 
-      <div style={{width:"100%"},{padding:"10px"},{borderRadius:"25px"},{border:"1px solid black"}}>
+      <div style={{width:"100%"},{padding:"10px"},{borderRadius:"25px"},{border:"1px solid white"}}>
           <h1 style={{textAlign:"center"},{display:"inlineBlock"},{padding:"10px"}}>
             Cart
             <span style={{float:"right"}}> Cart Total : Rs. {total}</span>
